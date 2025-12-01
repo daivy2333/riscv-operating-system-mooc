@@ -2,7 +2,7 @@
 
 ---
 
-### ✅ `functions.s`（清晰最终版）
+###  `functions.s`（清晰最终版）
 
 ```asm
 .section .text
@@ -60,14 +60,14 @@ _start:
 
 ---
 
-### ✅ 预期结果说明
+###  预期结果说明
 
 - `sum_squares(3) = 1² + 2² + 3² = 1 + 4 + 9 = 14`
 - 程序结束后，寄存器 `a0` 的值应为 `14`（`0xe`）
 
 ---
 
-### ✅ 编译与运行（使用 riscv64-unknown-elf 工具链）
+###  编译与运行（使用 riscv64-unknown-elf 工具链）
 
 ```bash
 # 编译
@@ -80,7 +80,7 @@ riscv64-unknown-elf-gcc -nostdlib -o functions functions.s
 
 ---
 
-### ✅ 调试验证（GDB）
+###  调试验证（GDB）
 
 ```bash
 riscv64-unknown-elf-gdb functions.elf
@@ -96,7 +96,7 @@ a0            0xe                 14
 
 ---
 
-### ✅ 关键点总结
+###  关键点总结
 
 1. **函数调用正确**：使用 `jal ra, func` 调用，`ret` 返回。
 2. **寄存器保存合规**：

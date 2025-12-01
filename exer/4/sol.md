@@ -1,10 +1,10 @@
-好的，我完全理解你的情况。既然你的 Ubuntu 环境只有 RISC-V 64 位工具链（`riscv64-unknown-elf-*`），而没有 `riscv32` 的，那么我们就**直接使用 RISC-V 64 位工具链来完成练习 4-1 和 4-2**。这在学习交叉编译和工具链使用的核心概念上是完全等效的，只是目标架构从 `rv32ima` 变成了 `rv64imac`。
+ Ubuntu 环境只有 RISC-V 64 位工具链（`riscv64-unknown-elf-*`），而没有 `riscv32` 的，那么我们就**直接使用 RISC-V 64 位工具链来完成练习 4-1 和 4-2**。这在学习交叉编译和工具链使用的核心概念上是完全等效的，只是目标架构从 `rv32ima` 变成了 `rv64imac`。
 
 以下是为你量身定制的、基于 `riscv64` 工具链的完整操作指南：
 
 ---
 
-## 🛠️ 准备工作
+##  准备工作
 
 首先，确保你已经安装了 RISC-V 64 位交叉编译工具链。通常安装包名为 `gcc-riscv64-linux-gnu` 或 `gcc-riscv64-unknown-elf`。你可以通过以下命令检查：
 
@@ -28,7 +28,7 @@ sudo apt install gcc-riscv64-unknown-elf qemu-system-misc
 
 ---
 
-## ✅ 练习 4-1：交叉编译与文件分析 (使用 RISC-V 64)
+##  练习 4-1：交叉编译与文件分析 (使用 RISC-V 64)
 
 ### 步骤 1: 编写 `hello.c`
 
@@ -96,7 +96,7 @@ ELF Header:
   Section header string table index: 12
 ```
 
-✅ **关键点**：确认 `Class: ELF64` 和 `Machine: RISC-V`，说明这是一个 64 位 RISC-V 目标文件。
+ **关键点**：确认 `Class: ELF64` 和 `Machine: RISC-V`，说明这是一个 64 位 RISC-V 目标文件。
 
 ---
 
@@ -108,7 +108,7 @@ riscv64-unknown-elf-readelf -S hello.o
 
 你会看到各个段（section）的信息，如 `.text`（代码）、`.data`、`.bss`、`.rodata` 等。
 
-✅ **关键点**：了解目标文件由哪些段组成，以及它们的大小和属性。
+ **关键点**：了解目标文件由哪些段组成，以及它们的大小和属性。
 
 ---
 
@@ -133,7 +133,7 @@ Disassembly of section .text:
 
 ---
 
-### ✅ 练习 4-1（续）
+###  练习 4-1（续）
 
 6. 查看符号表：
 ```bash
@@ -176,7 +176,7 @@ riscv64-unknown-elf-readelf -d hello
 
 ---
 
-## ✅ 练习 4-2：运行 RISC-V 64 程序
+##  练习 4-2：运行 RISC-V 64 程序
 
 1. 启动 QEMU 用户模式运行（推荐，轻量）：
 ```bash
@@ -205,10 +205,3 @@ gdb-multiarch hello
 (gdb) quit
 kill %1
 ```
-
----
-
-完成 ✅  
-你已成功用 `riscv64` 工具链完成练习 4-1 和 4-2。
-
-需要我为你生成一个一键执行的 shell 脚本来自动化上述步骤吗？

@@ -5,18 +5,18 @@
 
 ---
 
-### ✅ **终极解决方案：强制使用默认架构（不写任何 `-march`）**
+###  **终极解决方案：强制使用默认架构（不写任何 `-march`）**
 
 直接运行（**去掉 `-mabi=lp64` 和 `-march`**）：
 ```bash
 riscv64-unknown-elf-gcc -static -o hello hello.c
 ```
 
-> ✔️ 这会让 GCC 使用它**唯一支持的默认目标**（通常是 `rv64imac_zicsr_zifencei` 或 `rv64gc`），绕过 multilib 匹配逻辑。
+>  这会让 GCC 使用它**唯一支持的默认目标**（通常是 `rv64imac_zicsr_zifencei` 或 `rv64gc`），绕过 multilib 匹配逻辑。
 
 ---
 
-### 🔍 验证是否成功：
+###  验证是否成功：
 ```bash
 # 1. 查看生成的 ELF 是不是 RISC-V 64
 riscv64-unknown-elf-readelf -h hello | grep -E "Class|Machine"
@@ -32,7 +32,7 @@ qemu-riscv64 ./hello
 
 ---
 
-### 📌 补充建议（避免后续踩坑）
+###  补充建议（避免后续踩坑）
 
 1. **永远不要写 `-march=...` 或 `-mabi=...`** —— 除非你知道你的工具链支持。
 2. 若仍失败，说明连默认 multilib 都没装全（极少见），请立即切换到 **xPack 工具链**（5 分钟搞定，无坑）：
@@ -49,7 +49,7 @@ source ~/.bashrc
 riscv-none-elf-gcc -march=rv64imac -mabi=lp64 -static -o hello hello.c
 ```
 
-> ✅ xPack 工具链全功能、支持所有 `-march`，且与课程完全兼容（课程作者也推荐）。
+>  xPack 工具链全功能、支持所有 `-march`，且与课程完全兼容（课程作者也推荐）。
 
 ---
 

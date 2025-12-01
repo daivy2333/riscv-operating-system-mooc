@@ -2,9 +2,9 @@
 
 ---
 
-## 📌 **练习 3-1：编译并分析 hello.c**
+##  **练习 3-1：编译并分析 hello.c**
 
-### ✅ 步骤 1：编写 `hello.c`
+###  步骤 1：编写 `hello.c`
 
 创建一个名为 `hello.c` 的文件，内容如下：
 
@@ -17,11 +17,11 @@ int main() {
 }
 ```
 
-> 💡 注意：为了后续反汇编时能清晰看到源码与指令的对应关系，建议在编译时加上 `-g` 选项保留调试信息。
+>  注意：为了后续反汇编时能清晰看到源码与指令的对应关系，建议在编译时加上 `-g` 选项保留调试信息。
 
 ---
 
-### ✅ 步骤 2：使用 gcc 编译生成目标文件 `hello.o`
+###  步骤 2：使用 gcc 编译生成目标文件 `hello.o`
 
 在终端中执行：
 
@@ -35,7 +35,7 @@ gcc -g -c -m64 hello.c -o hello.o
 
 ---
 
-### ✅ 步骤 3：查看 `hello.o` 的文件头信息
+###  步骤 3：查看 `hello.o` 的文件头信息
 
 使用 `readelf` 工具（属于 binutils）：
 
@@ -68,14 +68,14 @@ ELF Header:
   Section header string table index: 12
 ```
 
-📌 **重点观察**：
+**重点观察**：
 - `Class: ELF64` → 64位
 - `Type: REL` → 可重定位目标文件（不是可执行文件）
 - `Machine: Advanced Micro Devices X86-64` → 目标架构正确
 
 ---
 
-### ✅ 步骤 4：查看 `hello.o` 的 Section Header Table
+###  步骤 4：查看 `hello.o` 的 Section Header Table
 
 继续使用 `readelf`：
 
@@ -100,7 +100,7 @@ Section Headers:
   ...
 ```
 
-📌 **关键 section**：
+ **关键 section**：
 - `.text`：存放代码（main 函数等）
 - `.data`：已初始化的全局/静态变量
 - `.bss`：未初始化的全局/静态变量
@@ -108,7 +108,7 @@ Section Headers:
 
 ---
 
-### ✅ 步骤 5：对 `hello.o` 进行反汇编，并对照源码
+### 步骤 5：对 `hello.o` 进行反汇编，并对照源码
 
 使用 `objdump`（也属于 binutils）：
 
@@ -145,7 +145,7 @@ Disassembly of section .rodata:
    0:   68 65 6c 6c 6f 20 77 6f 72 6c 64 21 0a 00    hello world!\n
 ```
 
-📌 **观察点**：
+ **观察点**：
 - `main` 函数的汇编指令被列出。
 - 字符串 `"hello world!\n"` 存放在 `.rodata` 段（只读数据段），地址为 `0x0`。
 - `lea 0x0(%rip),%rdi` 这条指令加载的是字符串的地址（通过 PC 相对寻址）。
@@ -154,9 +154,9 @@ Disassembly of section .rodata:
 
 ---
 
-## 📌 **练习 3-2：分析变量存储位置**
+## **练习 3-2：分析变量存储位置**
 
-你提供的代码是：
+
 
 ```c
 #include <stdio.h>
@@ -180,7 +180,7 @@ void main()
 
 ---
 
-### ✅ 步骤 1：编译成 `.o` 文件
+###  步骤 1：编译成 `.o` 文件
 
 ```bash
 gcc -g -c -m64 exercise3_2.c -o exercise3_2.o
@@ -188,7 +188,7 @@ gcc -g -c -m64 exercise3_2.c -o exercise3_2.o
 
 ---
 
-### ✅ 步骤 2：使用 `readelf` 或 `objdump` 分析各变量所在的 section
+###  步骤 2：使用 `readelf` 或 `objdump` 分析各变量所在的 section
 
 #### 方法一：使用 `objdump -t` 查看符号表
 
@@ -212,7 +212,7 @@ SYMBOL TABLE:
 0000000000000000 l     O .rodata	0000000000000004 .LC0
 ```
 
-📌 **结论**：
+ **结论**：
 
 | 变量名              | 所在 Section | 原因说明 |
 |---------------------|--------------|----------|
@@ -222,11 +222,11 @@ SYMBOL TABLE:
 | `static_var_uninit` | `.bss`       | 未初始化的静态变量，运行时清零 |
 | `auto_var`          | 栈上（无section） | 局部自动变量，存储在栈帧中，不在任何 section |
 
-> 🧠 补充：`auto_var` 是局部变量，编译后它会作为栈上的临时空间分配，在 `.text` 中体现为 `mov` 或 `sub` 指令操作栈指针 `%rsp`，不会出现在 `.data` 或 `.bss` 中。
+>  补充：`auto_var` 是局部变量，编译后它会作为栈上的临时空间分配，在 `.text` 中体现为 `mov` 或 `sub` 指令操作栈指针 `%rsp`，不会出现在 `.data` 或 `.bss` 中。
 
 ---
 
-### ✅ 步骤 3：验证字符串 `"hello world!\n"` 的位置
+###  步骤 3：验证字符串 `"hello world!\n"` 的位置
 
 再次使用 `objdump -s -j .rodata exercise3_2.o`
 
@@ -241,11 +241,11 @@ Contents of section .rodata:
  0000 68656c6c 6f20776f 726c6421 0a00     hello world!\n.
 ```
 
-✅ 确认字符串存放在 `.rodata` 段。
+ 确认字符串存放在 `.rodata` 段。
 
 ---
 
-## ✅ 最终总结
+##  最终总结
 
 ### 练习 3-1 总结：
 
@@ -268,13 +268,13 @@ Contents of section .rodata:
 
 ---
 
-## 💡 小贴士
+##  小贴士
 
 - 如果你想看到更详细的内存布局，可以使用 `nm`、`readelf -l`（程序头）、`objdump -h`（section header）等工具。
 - 对比 `clang` 编译的结果：`clang -g -c -m64 hello.c -o hello_clang.o`，然后用相同命令分析，你会发现结构基本一致，只是某些优化或调试信息略有不同。
 
 ---
 
-✅ 你现在已经掌握了如何使用 GCC + Binutils 工具链分析 ELF 文件结构和变量存储位置！这是理解程序底层机制的重要一步！
+ 你现在已经掌握了如何使用 GCC + Binutils 工具链分析 ELF 文件结构和变量存储位置！这是理解程序底层机制的重要一步！
 
 如果你需要我帮你写一个自动化脚本或者可视化表格，也可以告诉我 😊
