@@ -1,0 +1,569 @@
+# PROJECT SUMMARY: aigv
+## 1. Metadata
+- Root: /home/daivy/projects/riscv-operating-system-mooc/aigv
+- Generated Context for AI Analysis
+
+## 2. Directory Structure & Key Files
+```text
+├── 📄 d.py  # import os
+├── 📄 d_1.py  # import os
+├── 📄 d_3.py  # import os,re,argparse
+├── 📄 normal.py  # import os
+└── 📄 os.py  # import os, re, argparse
+```
+
+## 4. Source Code Context (Minified)
+The following code has been minified (comments removed, whitespace compressed) to save tokens.
+
+
+--- BEGIN FILE: d.py ---
+import os
+import sys
+import argparse
+import re
+BINARY_EXTENSIONS = {'.o', '.a', '.bin', '.elf', '.img', '.iso', '.zip', '.tar', '.gz', '.bz2', '.xz', '.7z', '.rar', '.exe', '.dll', '.so', '.dylib', '.lib', '.png', '.jpg', '.jpeg', '.gif', '.bmp', '.ico', '.svg', '.pdf', '.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx', '.mp3', '.mp4', '.avi', '.mov', '.wav', '.flac', '.ogg', '.mkv', '.webm', '.ttf', '.otf', '.woff', '.woff2'}
+
+def is_binary_file(filename):
+    (_, ext) = os.path.splitext(filename)
+    return ext.lower() in BINARY_EXTENSIONS
+
+def remove_comments(content):
+    content = re.sub('/\\*.*?\\*/', '', content, flags=re.DOTALL)
+    content = re.sub('//.*', '', content)
+    content = re.sub('#.*', '', content)
+    content = re.sub('^\\s*#.*', '', content, flags=re.MULTILINE)
+    content = re.sub('<!--.*?-->', '', content, flags=re.DOTALL)
+    content = re.sub('^\\s*#.*$', '', content, flags=re.MULTILINE)
+    return content
+
+def process_directory(directory, output_file):
+    files = []
+    for filename in sorted(os.listdir(directory)):
+        filepath = os.path.join(directory, filename)
+        if os.path.isfile(filepath):
+            if is_binary_file(filename):
+                continue
+            files.append(filename)
+    with open(output_file, 'w', encoding='utf-8') as out_f:
+        for filename in files:
+            filepath = os.path.join(directory, filename)
+            out_f.write(f'{filename}\n')
+            try:
+                with open(filepath, 'r', encoding='utf-8') as in_f:
+                    content = in_f.read()
+                    content = remove_comments(content)
+                    content = '\n'.join((line for line in content.split('\n') if line.strip()))
+                    out_f.write(content)
+            except UnicodeDecodeError:
+                continue
+            out_f.write('\n')
+
+def main():
+    parser = argparse.ArgumentParser(description='将指定目录中的所有文件名和内容合并到一个文本文件中')
+    parser.add_argument('directory', help='要处理的目录路径')
+    parser.add_argument('-o', '--output', default='daima.txt', help='输出文件名 (默认: daima.txt)')
+    args = parser.parse_args()
+    if not os.path.isdir(args.directory):
+        print(f"错误: 目录 '{args.directory}' 不存在")
+        sys.exit(1)
+    print(f'正在处理目录: {args.directory}')
+    process_directory(args.directory, args.output)
+    print(f'处理完成，结果已保存到: {args.output}')
+if __name__ == '__main__':
+    main()
+--- END FILE: d.py ---
+
+--- BEGIN FILE: d_1.py ---
+import os
+import sys
+import argparse
+import re
+import ast
+EXTENSIONS = {'.c', '.h', '.cpp', '.hpp', '.cc', '.s', '.S', '.asm', '.ld', 'Makefile', '.mk', '.py'}
+IGNORE_DIRS = {'.git', 'build', 'dist', '__pycache__', '.vscode', '.idea'}
+PREPROCESSOR_PREFIXES = ('#include', '#define', '#ifdef', '#ifndef', '#endif', '#else', '#elif', '#pragma', '#undef')
+
+def is_source_file(filename):
+    if filename in {'Makefile'}:
+        return True
+    (_, ext) = os.path.splitext(filename)
+    return ext in EXTENSIONS
+
+def strip_c_comments(text):
+
+    def replacer(match):
+        s = match.group(0)
+        if s.startswith('/'):
+            return ' '
+        else:
+            return s
+    pattern = re.compile('//.*?$|/\\*.*?\\*/|\\\'(?:\\\\.|[^\\\\\\\'])*\\\'|"(?:\\\\.|[^\\\\"])*"', re.DOTALL | re.MULTILINE)
+    return re.sub(pattern, replacer, text)
+
+def minify_c_style(content):
+    content = strip_c_comments(content)
+    lines = content.split('\n')
+    minified_lines = []
+    current_line_buffer = []
+    for line in lines:
+        line = line.strip()
+        if not line:
+            continue
+        if line.startswith('#'):
+            if current_line_buffer:
+                minified_lines.append(' '.join(current_line_buffer))
+                current_line_buffer = []
+            minified_lines.append(line)
+        else:
+            current_line_buffer.append(line)
+    if current_line_buffer:
+        minified_lines.append(' '.join(current_line_buffer))
+    text = '\n'.join(minified_lines)
+    ops = '=|\\+|-|\\*|/|%|&|\\||\\^|!|<|>|\\?|:|;|,|\\(|\\)|\\{|\\}|\\[|\\]'
+    text = re.sub(f'\\s*({ops})\\s*', '\\1', text)
+    return text
+
+def minify_python(content):
+    try:
+        tree = ast.parse(content)
+        for node in ast.walk(tree):
+            if isinstance(node, (ast.FunctionDef, ast.ClassDef, ast.Module)):
+                if node.body and isinstance(node.body[0], ast.Expr) and isinstance(node.body[0].value, (ast.Str, ast.Constant)):
+                    node.body.pop(0)
+        if hasattr(ast, 'unparse'):
+            return ast.unparse(tree)
+        else:
+            return content
+    except:
+        return content
+
+def process_directory(directory, output_file):
+    print(f'🚀 开始压缩处理: {directory}')
+    print(f'🎯 目标: RISC-V/C OS 开发环境 (保留 Struct/Asm/Ld)')
+    files_processed = 0
+    total_chars_raw = 0
+    total_chars_min = 0
+    with open(output_file, 'w', encoding='utf-8') as out_f:
+        out_f.write('<CODEBASE_CONTEXT_START>\n')
+        for (root, dirs, files) in os.walk(directory):
+            dirs[:] = [d for d in dirs if d not in IGNORE_DIRS and (not d.startswith('.'))]
+            for filename in sorted(files):
+                if not is_source_file(filename):
+                    continue
+                filepath = os.path.join(root, filename)
+                rel_path = os.path.relpath(filepath, directory)
+                try:
+                    with open(filepath, 'r', encoding='utf-8', errors='ignore') as in_f:
+                        content = in_f.read()
+                        total_chars_raw += len(content)
+                        (_, ext) = os.path.splitext(filename)
+                        if ext == '.py':
+                            minified = minify_python(content)
+                        else:
+                            minified = minify_c_style(content)
+                        if minified.strip():
+                            out_f.write(f'\n[FILE:{rel_path}]\n')
+                            out_f.write(minified)
+                            total_chars_min += len(minified)
+                            files_processed += 1
+                except Exception as e:
+                    print(f'❌ 跳过 {filename}: {e}')
+        out_f.write('\n<CODEBASE_CONTEXT_END>\n')
+    reduction = 0
+    if total_chars_raw > 0:
+        reduction = (1 - total_chars_min / total_chars_raw) * 100
+    print(f'\n✅ 处理完成!')
+    print(f'📄 文件数: {files_processed}')
+    print(f'📉 压缩率: {reduction:.2f}% (字符数 {total_chars_raw} -> {total_chars_min})')
+    print(f'💾 输出至: {output_file}')
+
+def main():
+    parser = argparse.ArgumentParser(description='OS开发专用代码压缩器')
+    parser.add_argument('directory', help='源代码目录')
+    parser.add_argument('-o', '--output', default='daima.txt', help='输出文件名')
+    args = parser.parse_args()
+    if not os.path.isdir(args.directory):
+        print('错误: 目录不存在')
+        sys.exit(1)
+    process_directory(args.directory, args.output)
+if __name__ == '__main__':
+    main()
+--- END FILE: d_1.py ---
+
+--- BEGIN FILE: d_3.py ---
+import os, re, argparse
+SRC_EXT = {'.c', '.h', '.S', '.ld', 'Makefile'}
+IGN = {'.git', 'build', 'dist', '__pycache__', '.vscode'}
+ARCH_MAP = {'core': [], 'mm': [], 'driver': [], 'fs': [], 'user': [], 'other': []}
+
+def classify(path):
+    for k in ARCH_MAP:
+        if f'/{k}/' in path:
+            return k
+    return 'other'
+
+def strip_comments(s):
+    s = re.sub('/\\*.*?\\*/', '', s, flags=re.S)
+    s = re.sub('//.*', '', s)
+    return s
+
+def minify_c(s):
+    s = strip_comments(s)
+    lines = []
+    buf = []
+    for l in s.splitlines():
+        l = l.strip()
+        if not l:
+            continue
+        if l.startswith('#'):
+            if buf:
+                lines.append(' '.join(buf))
+                buf = []
+            lines.append(l)
+        else:
+            buf.append(l)
+    if buf:
+        lines.append(' '.join(buf))
+    s = '\n'.join(lines)
+    s = re.sub('\\s*([=+\\-*/%&|^!<>?:;,(){}\\[\\]])\\s*', '\\1', s)
+    return s
+
+def parse_funcs(s):
+    return re.findall('\\b([a-zA-Z_][\\w\\s\\*]+?)\\s+([a-zA-Z_]\\w*)\\s*\\(', s)
+
+def parse_includes(s):
+    return re.findall('#include\\s+[<"](.+?)[>"]', s)
+
+def main(root, out):
+    (index, includes, funcs, code) = ([], [], [], [])
+    for (r, ds, fs) in os.walk(root):
+        ds[:] = [d for d in ds if d not in IGN]
+        for f in fs:
+            if f.endswith(tuple(SRC_EXT)):
+                p = os.path.join(r, f)
+                rp = os.path.relpath(p, root)
+                with open(p, 'r', errors='ignore') as fd:
+                    raw = fd.read()
+                ARCH_MAP[classify(rp)].append(rp)
+                inc = parse_includes(raw)
+                if inc:
+                    includes.append(f"{rp}->{','.join(inc)}")
+                fsig = parse_funcs(raw)
+                for (_, n) in fsig:
+                    funcs.append(n)
+                code.append((rp, minify_c(raw)))
+    with open(out, 'w') as o:
+        o.write('[ARCH]\n')
+        for (k, v) in ARCH_MAP.items():
+            if v:
+                o.write(f"{k}:{' '.join(v)}\n")
+        o.write('\n[INCLUDE_GRAPH]\n')
+        for i in includes:
+            o.write(i + '\n')
+        o.write('\n[SYMBOLS]\n')
+        o.write(' '.join(sorted(set(funcs))) + '\n')
+        o.write('\n[CODE]\n')
+        for (p, c) in code:
+            o.write(f'<{p}>\n{c}\n</{p}>\n')
+if __name__ == '__main__':
+    ap = argparse.ArgumentParser()
+    ap.add_argument('dir')
+    ap.add_argument('-o', default='os_context.txt')
+    a = ap.parse_args()
+    main(a.dir, a.o)
+--- END FILE: d_3.py ---
+
+--- BEGIN FILE: normal.py ---
+import os
+import sys
+import argparse
+import re
+import ast
+import json
+SOURCE_EXTS = {'.c', '.h', '.s', '.S', '.asm', '.ld', 'Makefile', '.mk', '.py', '.js', '.ts', '.json', '.sh'}
+IGNORE_DIRS = {'.git', 'build', 'dist', '__pycache__', '.vscode', 'node_modules', '.idea'}
+CONFIG_FILES = {'requirements.txt', 'package.json', 'Makefile', 'CMakeLists.txt'}
+
+class ProjectPacker:
+
+    def __init__(self, root_dir):
+        self.root_dir = os.path.abspath(root_dir)
+        self.project_name = os.path.basename(self.root_dir)
+        self.stats = {'files': 0, 'tokens_raw': 0, 'tokens_min': 0}
+        self.dependencies = []
+        self.file_summaries = {}
+
+    def generate_tree(self, dir_path, prefix=''):
+        tree_str = ''
+        try:
+            entries = sorted(os.listdir(dir_path))
+            entries = [e for e in entries if e not in IGNORE_DIRS and (not e.startswith('.'))]
+            for (index, entry) in enumerate(entries):
+                path = os.path.join(dir_path, entry)
+                is_last = index == len(entries) - 1
+                connector = '└── ' if is_last else '├── '
+                rel_path = os.path.relpath(path, self.root_dir)
+                if os.path.isdir(path):
+                    tree_str += f'{prefix}{connector}📁 {entry}/\n'
+                    extension = '    ' if is_last else '│   '
+                    tree_str += self.generate_tree(path, prefix + extension)
+                elif self._is_source_file(entry):
+                    desc = self._extract_file_description(path)
+                    desc_str = f'  Found: {desc}' if desc else ''
+                    tree_str += f"{prefix}{connector}📄 {entry}{('  # ' + desc if desc else '')}\n"
+                    if entry in CONFIG_FILES:
+                        self._parse_dependencies(path, entry)
+                else:
+                    tree_str += f'{prefix}{connector}{entry}\n'
+        except PermissionError:
+            pass
+        return tree_str
+
+    def _is_source_file(self, filename):
+        return any((filename.endswith(ext) for ext in SOURCE_EXTS)) or filename in CONFIG_FILES
+
+    def _extract_file_description(self, filepath):
+        try:
+            with open(filepath, 'r', encoding='utf-8', errors='ignore') as f:
+                lines = [f.readline().strip() for _ in range(5)]
+            for line in lines:
+                clean = re.sub('^[/|\\*|#]+\\s?', '', line).strip()
+                if clean and len(clean) > 5 and (not clean.startswith('include')) and (not clean.startswith('define')):
+                    return clean[:50] + '...' if len(clean) > 50 else clean
+        except:
+            return None
+        return None
+
+    def _parse_dependencies(self, filepath, filename):
+        try:
+            with open(filepath, 'r', encoding='utf-8') as f:
+                content = f.read()
+            if filename == 'Makefile':
+                flags = re.findall('(CFLAGS|LDFLAGS)\\s*=\\s*(.*)', content)
+                for (k, v) in flags:
+                    self.dependencies.append(f'Makefile {k}: {v.strip()}')
+            elif filename == 'requirements.txt':
+                libs = [line.strip() for line in content.split('\n') if line.strip() and (not line.startswith('#'))]
+                self.dependencies.append(f"Python Libs: {', '.join(libs[:10])}")
+            elif filename == 'package.json':
+                data = json.loads(content)
+                deps = data.get('dependencies', {})
+                self.dependencies.append(f"JS Libs: {', '.join(list(deps.keys())[:10])}")
+        except:
+            pass
+
+    def minify_code(self, content, ext):
+        if ext == '.py':
+            try:
+                tree = ast.parse(content)
+                for node in ast.walk(tree):
+                    if isinstance(node, (ast.FunctionDef, ast.ClassDef, ast.Module)):
+                        if node.body and isinstance(node.body[0], ast.Expr) and isinstance(node.body[0].value, ast.Constant):
+                            node.body.pop(0)
+                if hasattr(ast, 'unparse'):
+                    return ast.unparse(tree)
+            except:
+                pass
+            return content
+        else:
+            pattern = re.compile('//.*?$|/\\*.*?\\*/', re.DOTALL | re.MULTILINE)
+            content = re.sub(pattern, ' ', content)
+            lines = []
+            buf = []
+            for line in content.split('\n'):
+                line = line.strip()
+                if not line:
+                    continue
+                if line.startswith('#'):
+                    if buf:
+                        lines.append(' '.join(buf))
+                        buf = []
+                    lines.append(line)
+                else:
+                    buf.append(line)
+            if buf:
+                lines.append(' '.join(buf))
+            text = '\n'.join(lines)
+            ops = '=|\\+|-|\\*|/|%|&|\\||\\^|!|<|>|\\?|:|;|,|\\(|\\)|\\{|\\}|\\[|\\]'
+            text = re.sub(f'\\s*({ops})\\s*', '\\1', text)
+            return text
+
+    def pack(self, output_file):
+        print(f'📦 正在打包项目: {self.project_name} ...')
+        with open(output_file, 'w', encoding='utf-8') as out:
+            out.write(f'# PROJECT SUMMARY: {self.project_name}\n')
+            out.write('## 1. Metadata\n')
+            out.write(f'- Root: {self.root_dir}\n')
+            out.write(f'- Generated Context for AI Analysis\n\n')
+            out.write('## 2. Directory Structure & Key Files\n')
+            out.write('```text\n')
+            out.write(self.generate_tree(self.root_dir))
+            out.write('```\n\n')
+            if self.dependencies:
+                out.write('## 3. Configuration & Dependencies\n')
+                for dep in self.dependencies:
+                    out.write(f'- {dep}\n')
+                out.write('\n')
+            out.write('## 4. Source Code Context (Minified)\n')
+            out.write('The following code has been minified (comments removed, whitespace compressed) to save tokens.\n\n')
+            for (root, _, files) in os.walk(self.root_dir):
+                if any((ignored in root for ignored in IGNORE_DIRS)):
+                    continue
+                for filename in sorted(files):
+                    if not self._is_source_file(filename):
+                        continue
+                    filepath = os.path.join(root, filename)
+                    rel_path = os.path.relpath(filepath, self.root_dir)
+                    (_, ext) = os.path.splitext(filename)
+                    try:
+                        with open(filepath, 'r', encoding='utf-8', errors='ignore') as f:
+                            raw = f.read()
+                            minified = self.minify_code(raw, ext)
+                            if minified.strip():
+                                out.write(f'\n--- BEGIN FILE: {rel_path} ---\n')
+                                out.write(minified)
+                                out.write(f'\n--- END FILE: {rel_path} ---\n')
+                                self.stats['files'] += 1
+                    except Exception as e:
+                        print(f'Skipping {filename}: {e}')
+        print(f'✅ 完成! 已保存至: {output_file}')
+        print(f"📊 统计: 包含了 {self.stats['files']} 个核心文件")
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('dir', help='Project directory')
+    parser.add_argument('-o', '--output', default='daima.txt')
+    args = parser.parse_args()
+    packer = ProjectPacker(args.dir)
+    packer.pack(args.output)
+if __name__ == '__main__':
+    main()
+--- END FILE: normal.py ---
+
+--- BEGIN FILE: os.py ---
+import os, re, argparse
+SRC_EXT = {'.c', '.h', '.S', '.s', '.ld', 'Makefile'}
+IGN = {'.git', 'build', 'dist', '__pycache__', '.vscode'}
+ARCH_MAP = {'core': [], 'mm': [], 'driver': [], 'fs': [], 'user': [], 'other': []}
+
+def classify(path):
+    for k in ARCH_MAP:
+        if f'/{k}/' in path:
+            return k
+    return 'other'
+
+def strip_c_comments(s):
+    s = re.sub('/\\*.*?\\*/', '', s, flags=re.S)
+    s = re.sub('//.*', '', s)
+    return s
+
+def minify_c(s):
+    s = strip_c_comments(s)
+    (lines, buf) = ([], [])
+    for l in s.splitlines():
+        l = l.strip()
+        if not l:
+            continue
+        if l.startswith('#'):
+            if buf:
+                lines.append(' '.join(buf))
+                buf = []
+            lines.append(l)
+        else:
+            buf.append(l)
+    if buf:
+        lines.append(' '.join(buf))
+    s = '\n'.join(lines)
+    s = re.sub('\\s*([=+\\-*/%&|^!<>?:;,(){}\\[\\]])\\s*', '\\1', s)
+    return s
+
+def minify_ld(s):
+    entry = None
+    base = None
+    sections = []
+    symbols = []
+    m = re.search('ENTRY\\s*\\(\\s*([^)]+)\\s*\\)', s)
+    if m:
+        entry = m.group(1)
+    m = re.search('\\.\\s*=\\s*(0x[0-9a-fA-F]+)', s)
+    if m:
+        base = m.group(1)
+    for sec in re.finditer('\\.(\\w+)\\s*:\\s*\\{([^}]*)\\}', s, re.S):
+        name = sec.group(1)
+        body = sec.group(2)
+        parts = re.findall('\\*\\(([^)]+)\\)', body)
+        if parts:
+            sections.append(f".{name}: {' '.join(parts)}")
+        syms = re.findall('([a-zA-Z_]\\w*)\\s*=', body)
+        symbols.extend(syms)
+    return (entry, base, sections, sorted(set(symbols)))
+
+def minify_asm(s):
+    out = []
+    for line in s.splitlines():
+        line = line.rstrip()
+        if not line:
+            continue
+        stripped = line.lstrip()
+        if stripped.startswith('#'):
+            if stripped.startswith(('#include', '#define', '#if', '#endif', '#ifdef', '#ifndef')):
+                out.append(stripped)
+            continue
+        if '#' in line:
+            line = line.split('#', 1)[0].rstrip()
+        if line:
+            out.append(line)
+    return '\n'.join(out)
+
+def parse_funcs(s):
+    return re.findall('\\b([a-zA-Z_][\\w\\s\\*]+?)\\s+([a-zA-Z_]\\w*)\\s*\\(', s)
+
+def parse_includes(s):
+    return re.findall('#include\\s+[<"](.+?)[>"]', s)
+
+def main(root, out):
+    (includes, funcs, code) = ([], [], [])
+    for (r, ds, fs) in os.walk(root):
+        ds[:] = [d for d in ds if d not in IGN]
+        for f in fs:
+            if f.endswith(tuple(SRC_EXT)):
+                p = os.path.join(r, f)
+                rp = os.path.relpath(p, root)
+                with open(p, 'r', errors='ignore') as fd:
+                    raw = fd.read()
+                ARCH_MAP[classify(rp)].append(rp)
+                inc = parse_includes(raw)
+                if inc:
+                    includes.append(f"{rp}->{','.join(inc)}")
+                if f.endswith(('.c', '.h')):
+                    for (_, n) in parse_funcs(raw):
+                        funcs.append(n)
+                    minified = minify_c(raw)
+                elif f.endswith('.ld'):
+                    (entry, base, secs, syms) = minify_ld(raw)
+                    code.append((rp, '[LD_LAYOUT]\n' + (f'ENTRY={entry}\n' if entry else '') + (f'BASE={base}\n' if base else '') + '\n'.join(secs) + ('\n\n[LD_SYMBOLS]\n' + ' '.join(syms) if syms else '')))
+                    continue
+                else:
+                    minified = minify_asm(raw)
+                if minified.strip():
+                    code.append((rp, minified))
+    with open(out, 'w') as o:
+        o.write('[ARCH]\n')
+        for (k, v) in ARCH_MAP.items():
+            if v:
+                o.write(f"{k}:{' '.join(v)}\n")
+        o.write('\n[INCLUDE_GRAPH]\n')
+        for i in includes:
+            o.write(i + '\n')
+        o.write('\n[SYMBOLS]\n')
+        o.write(' '.join(sorted(set(funcs))) + '\n')
+        o.write('\n[CODE]\n')
+        for (p, c) in code:
+            o.write(f'<{p}>\n{c}\n</{p}>\n')
+if __name__ == '__main__':
+    ap = argparse.ArgumentParser()
+    ap.add_argument('dir')
+    ap.add_argument('-o', default='os_context.txt')
+    a = ap.parse_args()
+    main(a.dir, a.o)
+--- END FILE: os.py ---
