@@ -1,0 +1,19 @@
+{
+  "deps": [],
+  "file": "../usys.S",
+  "hash": "e40cfa38f54ac4ac2cf8cc47fba903f3a53bb07003ea5f6c0d304c66cbfeb1be",
+  "lang": "S",
+  "symbols": [
+    {
+      "attrs": {},
+      "kind": "label",
+      "name": "gethid"
+    }
+  ],
+  "timestamp": "2025-12-24T07:13:58.453679",
+  "unit": {
+    "module": "11-syscall",
+    "role": "lib"
+  },
+  "version": "pir-analyzer-v1"
+}

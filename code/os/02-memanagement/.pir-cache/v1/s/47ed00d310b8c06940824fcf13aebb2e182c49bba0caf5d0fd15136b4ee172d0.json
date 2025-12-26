@@ -1,0 +1,32 @@
+{
+  "deps": [
+    "call:[park]",
+    "call:[start_kernel]"
+  ],
+  "file": "../start.S",
+  "hash": "47ed00d310b8c06940824fcf13aebb2e182c49bba0caf5d0fd15136b4ee172d0",
+  "lang": "S",
+  "symbols": [
+    {
+      "attrs": {},
+      "kind": "label",
+      "name": "_start"
+    },
+    {
+      "attrs": {},
+      "kind": "label",
+      "name": "park"
+    },
+    {
+      "attrs": {},
+      "kind": "label",
+      "name": "stacks"
+    }
+  ],
+  "timestamp": "2025-12-23T23:49:32.407317",
+  "unit": {
+    "module": "02-memanagement",
+    "role": "lib"
+  },
+  "version": "pir-analyzer-v1"
+}

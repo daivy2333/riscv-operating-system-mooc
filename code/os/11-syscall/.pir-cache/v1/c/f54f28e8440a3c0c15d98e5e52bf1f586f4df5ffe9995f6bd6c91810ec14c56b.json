@@ -1,0 +1,27 @@
+{
+  "deps": [
+    "include:[os.h]",
+    "include:[syscall.h]"
+  ],
+  "file": "../syscall.c",
+  "hash": "f54f28e8440a3c0c15d98e5e52bf1f586f4df5ffe9995f6bd6c91810ec14c56b",
+  "lang": "C",
+  "symbols": [
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "sys_gethid"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "do_syscall"
+    }
+  ],
+  "timestamp": "2025-12-24T07:13:58.450204",
+  "unit": {
+    "module": "11-syscall",
+    "role": "lib"
+  },
+  "version": "pir-analyzer-v1"
+}

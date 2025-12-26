@@ -1,0 +1,33 @@
+{
+  "deps": [
+    "call:[uart_init]",
+    "call:[uart_puts]",
+    "call:[loop]"
+  ],
+  "file": "../kernel.S",
+  "hash": "d3d965a6063d31046adddb0c9cf1fd29b36da8bfe95bbec868c8831bf6a657dd",
+  "lang": "S",
+  "symbols": [
+    {
+      "attrs": {},
+      "kind": "label",
+      "name": "start_kernel"
+    },
+    {
+      "attrs": {},
+      "kind": "label",
+      "name": "loop"
+    },
+    {
+      "attrs": {},
+      "kind": "label",
+      "name": "hello_str"
+    }
+  ],
+  "timestamp": "2025-12-24T13:51:30.449311",
+  "unit": {
+    "module": "1",
+    "role": "lib"
+  },
+  "version": "pir-analyzer-v1"
+}

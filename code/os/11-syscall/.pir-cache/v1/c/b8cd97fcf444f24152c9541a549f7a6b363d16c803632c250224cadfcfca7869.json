@@ -1,0 +1,26 @@
+{
+  "deps": [
+    "include:[os.h]"
+  ],
+  "file": "../lock.c",
+  "hash": "b8cd97fcf444f24152c9541a549f7a6b363d16c803632c250224cadfcfca7869",
+  "lang": "C",
+  "symbols": [
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "spin_lock"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "spin_unlock"
+    }
+  ],
+  "timestamp": "2025-12-24T07:13:58.445880",
+  "unit": {
+    "module": "11-syscall",
+    "role": "lib"
+  },
+  "version": "pir-analyzer-v1"
+}

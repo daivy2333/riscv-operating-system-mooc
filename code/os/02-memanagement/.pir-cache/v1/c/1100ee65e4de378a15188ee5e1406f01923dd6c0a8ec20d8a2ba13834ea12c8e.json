@@ -1,0 +1,36 @@
+{
+  "deps": [
+    "include:[os.h]"
+  ],
+  "file": "../printf.c",
+  "hash": "1100ee65e4de378a15188ee5e1406f01923dd6c0a8ec20d8a2ba13834ea12c8e",
+  "lang": "C",
+  "symbols": [
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "_vsnprintf"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "_vprintf"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "printf"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "panic"
+    }
+  ],
+  "timestamp": "2025-12-23T23:49:32.409099",
+  "unit": {
+    "module": "02-memanagement",
+    "role": "lib"
+  },
+  "version": "pir-analyzer-v1"
+}

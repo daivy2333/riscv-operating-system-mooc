@@ -1,0 +1,13 @@
+{
+  "deps": [],
+  "file": "../types.h",
+  "hash": "4040e46ada30e283ab2fa88ff47cafa6904dfcade7ef7d29d973555572f2dd0e",
+  "lang": "H",
+  "symbols": [],
+  "timestamp": "2025-12-24T07:13:58.448673",
+  "unit": {
+    "module": "11-syscall",
+    "role": "lib"
+  },
+  "version": "pir-analyzer-v1"
+}

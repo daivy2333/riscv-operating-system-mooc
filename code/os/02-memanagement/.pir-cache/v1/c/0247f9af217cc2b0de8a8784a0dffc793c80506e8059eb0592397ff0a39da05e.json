@@ -1,0 +1,21 @@
+{
+  "deps": [
+    "include:[os.h]"
+  ],
+  "file": "../kernel.c",
+  "hash": "0247f9af217cc2b0de8a8784a0dffc793c80506e8059eb0592397ff0a39da05e",
+  "lang": "C",
+  "symbols": [
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "start_kernel"
+    }
+  ],
+  "timestamp": "2025-12-23T23:49:32.409670",
+  "unit": {
+    "module": "02-memanagement",
+    "role": "lib"
+  },
+  "version": "pir-analyzer-v1"
+}

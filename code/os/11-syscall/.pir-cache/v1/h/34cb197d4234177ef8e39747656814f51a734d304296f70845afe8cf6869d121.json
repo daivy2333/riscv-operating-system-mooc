@@ -1,0 +1,19 @@
+{
+  "deps": [
+    "include:[types.h]",
+    "include:[riscv.h]",
+    "include:[platform.h]",
+    "include:[stddef.h]",
+    "include:[stdarg.h]"
+  ],
+  "file": "../os.h",
+  "hash": "34cb197d4234177ef8e39747656814f51a734d304296f70845afe8cf6869d121",
+  "lang": "H",
+  "symbols": [],
+  "timestamp": "2025-12-24T07:13:58.441696",
+  "unit": {
+    "module": "11-syscall",
+    "role": "lib"
+  },
+  "version": "pir-analyzer-v1"
+}

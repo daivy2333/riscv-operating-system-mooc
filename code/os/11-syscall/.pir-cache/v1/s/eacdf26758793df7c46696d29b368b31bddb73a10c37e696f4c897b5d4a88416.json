@@ -1,0 +1,32 @@
+{
+  "deps": [
+    "call:[park]",
+    "call:[start_kernel]"
+  ],
+  "file": "../start.S",
+  "hash": "eacdf26758793df7c46696d29b368b31bddb73a10c37e696f4c897b5d4a88416",
+  "lang": "S",
+  "symbols": [
+    {
+      "attrs": {},
+      "kind": "label",
+      "name": "_start"
+    },
+    {
+      "attrs": {},
+      "kind": "label",
+      "name": "park"
+    },
+    {
+      "attrs": {},
+      "kind": "label",
+      "name": "stacks"
+    }
+  ],
+  "timestamp": "2025-12-24T07:13:58.447770",
+  "unit": {
+    "module": "11-syscall",
+    "role": "lib"
+  },
+  "version": "pir-analyzer-v1"
+}

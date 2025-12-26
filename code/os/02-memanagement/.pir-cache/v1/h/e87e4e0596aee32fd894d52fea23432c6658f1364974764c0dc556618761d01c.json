@@ -1,0 +1,13 @@
+{
+  "deps": [],
+  "file": "../types.h",
+  "hash": "e87e4e0596aee32fd894d52fea23432c6658f1364974764c0dc556618761d01c",
+  "lang": "H",
+  "symbols": [],
+  "timestamp": "2025-12-23T23:49:32.408157",
+  "unit": {
+    "module": "02-memanagement",
+    "role": "lib"
+  },
+  "version": "pir-analyzer-v1"
+}

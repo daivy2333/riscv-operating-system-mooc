@@ -1,0 +1,21 @@
+{
+  "deps": [
+    "include:[os.h]"
+  ],
+  "file": "../kernel.c",
+  "hash": "fcf1fd120fa63ccc868977418da13715dc2af5b49de59d22e36a6e6caf79c36d",
+  "lang": "C",
+  "symbols": [
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "start_kernel"
+    }
+  ],
+  "timestamp": "2025-12-24T07:13:58.454361",
+  "unit": {
+    "module": "11-syscall",
+    "role": "lib"
+  },
+  "version": "pir-analyzer-v1"
+}

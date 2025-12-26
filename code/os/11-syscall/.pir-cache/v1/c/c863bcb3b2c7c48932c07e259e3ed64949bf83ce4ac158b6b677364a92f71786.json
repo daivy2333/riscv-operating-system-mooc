@@ -1,0 +1,41 @@
+{
+  "deps": [
+    "include:[os.h]"
+  ],
+  "file": "../uart.c",
+  "hash": "c863bcb3b2c7c48932c07e259e3ed64949bf83ce4ac158b6b677364a92f71786",
+  "lang": "C",
+  "symbols": [
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "uart_init"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "uart_putc"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "uart_puts"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "uart_getc"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "uart_isr"
+    }
+  ],
+  "timestamp": "2025-12-24T07:13:58.446971",
+  "unit": {
+    "module": "11-syscall",
+    "role": "lib"
+  },
+  "version": "pir-analyzer-v1"
+}

@@ -1,0 +1,49 @@
+{
+  "deps": [
+    "call:[wait_tx]",
+    "call:[done_puts]",
+    "call:[uart_putc]",
+    "call:[puts_loop]"
+  ],
+  "file": "../uart.S",
+  "hash": "ffe33cd797930e42a6017ea5b5e463bc83cb40d419f9a7c3374d5e5ef21556a1",
+  "lang": "S",
+  "symbols": [
+    {
+      "attrs": {},
+      "kind": "label",
+      "name": "uart_init"
+    },
+    {
+      "attrs": {},
+      "kind": "label",
+      "name": "uart_putc"
+    },
+    {
+      "attrs": {},
+      "kind": "label",
+      "name": "wait_tx"
+    },
+    {
+      "attrs": {},
+      "kind": "label",
+      "name": "uart_puts"
+    },
+    {
+      "attrs": {},
+      "kind": "label",
+      "name": "puts_loop"
+    },
+    {
+      "attrs": {},
+      "kind": "label",
+      "name": "done_puts"
+    }
+  ],
+  "timestamp": "2025-12-24T13:51:30.448660",
+  "unit": {
+    "module": "1",
+    "role": "lib"
+  },
+  "version": "pir-analyzer-v1"
+}

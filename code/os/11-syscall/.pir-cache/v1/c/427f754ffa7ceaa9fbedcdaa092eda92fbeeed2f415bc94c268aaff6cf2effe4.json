@@ -1,0 +1,41 @@
+{
+  "deps": [
+    "include:[os.h]"
+  ],
+  "file": "../sched.c",
+  "hash": "427f754ffa7ceaa9fbedcdaa092eda92fbeeed2f415bc94c268aaff6cf2effe4",
+  "lang": "C",
+  "symbols": [
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "sched_init"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "schedule"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "task_create"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "task_yield"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "task_delay"
+    }
+  ],
+  "timestamp": "2025-12-24T07:13:58.435419",
+  "unit": {
+    "module": "11-syscall",
+    "role": "lib"
+  },
+  "version": "pir-analyzer-v1"
+}

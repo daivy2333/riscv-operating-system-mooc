@@ -149,3 +149,33 @@ void uart_puts(char *s) {
 5. 进入主循环：系统准备就绪，等待进一步开发
 
 这是一个最小化的操作系统内核，具备了基本的内存管理、输出调试信息和系统初始化的能力。
+
+
+
+
+1. **types.h**：添加了`size_t`类型定义，用于malloc和free函数。
+
+2. **os.h**：
+   - 添加了`block_header_t`结构体定义，用于管理内存块
+   - 添加了`malloc`、`free`和`heap_init`函数声明
+
+3. **heap.c**（新建）：实现了完整的堆内存管理功能
+   - `heap_init()`：初始化堆
+   - `malloc()`：分配内存，使用首次适应算法
+   - `free()`：释放内存，并合并相邻的空闲块
+   - `split_block()`：分割大块内存
+   - `coalesce()`：合并相邻的空闲块
+   - `extend_heap()`：扩展堆空间，通过调用page_alloc获取更多页
+
+4. **kernel.c**：
+   - 在`start_kernel`函数中调用`heap_init()`初始化堆
+   - 添加了测试代码，验证malloc和free的功能
+
+5. **Makefile**：将heap.c添加到编译列表中
+
+6. **02-memanagement.pir**：
+   - 添加了heap.c单元
+   - 添加了heap_init、malloc和free的符号定义
+   - 添加了heap.c的依赖关系
+
+这些实现遵循了deal.md中提供的解决方案，使用隐式空闲链表和首次适应算法实现了字节级的内存分配器，能够精确到字节地分配内存，并通过块分割和合并来管理内存碎片。

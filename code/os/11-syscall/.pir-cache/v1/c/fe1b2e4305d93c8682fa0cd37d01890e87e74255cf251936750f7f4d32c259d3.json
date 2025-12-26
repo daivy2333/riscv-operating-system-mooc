@@ -1,0 +1,41 @@
+{
+  "deps": [
+    "include:[os.h]"
+  ],
+  "file": "../timer.c",
+  "hash": "fe1b2e4305d93c8682fa0cd37d01890e87e74255cf251936750f7f4d32c259d3",
+  "lang": "C",
+  "symbols": [
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "timer_load"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "timer_init"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "timer_delete"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "timer_check"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "timer_handler"
+    }
+  ],
+  "timestamp": "2025-12-24T07:13:58.445417",
+  "unit": {
+    "module": "11-syscall",
+    "role": "lib"
+  },
+  "version": "pir-analyzer-v1"
+}

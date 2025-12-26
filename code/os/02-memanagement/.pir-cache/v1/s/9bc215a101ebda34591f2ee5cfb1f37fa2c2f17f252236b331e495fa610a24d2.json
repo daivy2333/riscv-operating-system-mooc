@@ -1,0 +1,13 @@
+{
+  "deps": [],
+  "file": "../mem.S",
+  "hash": "9bc215a101ebda34591f2ee5cfb1f37fa2c2f17f252236b331e495fa610a24d2",
+  "lang": "S",
+  "symbols": [],
+  "timestamp": "2025-12-23T23:49:32.408635",
+  "unit": {
+    "module": "02-memanagement",
+    "role": "lib"
+  },
+  "version": "pir-analyzer-v1"
+}

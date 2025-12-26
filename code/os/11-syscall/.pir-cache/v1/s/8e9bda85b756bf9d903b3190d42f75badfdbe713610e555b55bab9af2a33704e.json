@@ -1,0 +1,26 @@
+{
+  "deps": [
+    "call:[trap_handler]"
+  ],
+  "file": "../entry.S",
+  "hash": "8e9bda85b756bf9d903b3190d42f75badfdbe713610e555b55bab9af2a33704e",
+  "lang": "S",
+  "symbols": [
+    {
+      "attrs": {},
+      "kind": "label",
+      "name": "trap_vector"
+    },
+    {
+      "attrs": {},
+      "kind": "label",
+      "name": "switch_to"
+    }
+  ],
+  "timestamp": "2025-12-24T07:13:58.441221",
+  "unit": {
+    "module": "11-syscall",
+    "role": "lib"
+  },
+  "version": "pir-analyzer-v1"
+}

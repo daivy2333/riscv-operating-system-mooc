@@ -1,0 +1,71 @@
+{
+  "deps": [
+    "include:[types.h]"
+  ],
+  "file": "../riscv.h",
+  "hash": "b7607747ee221c131a3ebbc55380fbfcdb1680d495d5f93a6daaf3b276911115",
+  "lang": "H",
+  "symbols": [
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "r_tp"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "r_mhartid"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "r_mstatus"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "w_mstatus"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "w_mepc"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "r_mepc"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "w_mscratch"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "w_mtvec"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "r_mie"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "w_mie"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "r_mcause"
+    }
+  ],
+  "timestamp": "2025-12-24T07:13:58.440138",
+  "unit": {
+    "module": "11-syscall",
+    "role": "lib"
+  },
+  "version": "pir-analyzer-v1"
+}

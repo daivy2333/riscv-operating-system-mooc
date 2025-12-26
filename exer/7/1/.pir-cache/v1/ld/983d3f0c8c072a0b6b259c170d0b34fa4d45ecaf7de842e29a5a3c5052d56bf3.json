@@ -1,0 +1,34 @@
+{
+  "deps": [],
+  "file": "../linker.ld",
+  "hash": "983d3f0c8c072a0b6b259c170d0b34fa4d45ecaf7de842e29a5a3c5052d56bf3",
+  "lang": "LD",
+  "symbols": [
+    {
+      "attrs": {},
+      "kind": "ld_entry",
+      "name": "start_kernel"
+    },
+    {
+      "attrs": {},
+      "kind": "ld_symbol",
+      "name": "__bss_start"
+    },
+    {
+      "attrs": {},
+      "kind": "ld_symbol",
+      "name": "__bss_end"
+    },
+    {
+      "attrs": {},
+      "kind": "ld_symbol",
+      "name": "_end"
+    }
+  ],
+  "timestamp": "2025-12-24T13:51:30.447214",
+  "unit": {
+    "module": "1",
+    "role": "lib"
+  },
+  "version": "pir-analyzer-v1"
+}

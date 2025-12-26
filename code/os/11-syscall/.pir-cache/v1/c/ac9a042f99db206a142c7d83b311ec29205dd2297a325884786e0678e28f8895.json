@@ -1,0 +1,31 @@
+{
+  "deps": [
+    "include:[os.h]"
+  ],
+  "file": "../plic.c",
+  "hash": "ac9a042f99db206a142c7d83b311ec29205dd2297a325884786e0678e28f8895",
+  "lang": "C",
+  "symbols": [
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "plic_init"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "plic_claim"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "plic_complete"
+    }
+  ],
+  "timestamp": "2025-12-24T07:13:58.444397",
+  "unit": {
+    "module": "11-syscall",
+    "role": "lib"
+  },
+  "version": "pir-analyzer-v1"
+}

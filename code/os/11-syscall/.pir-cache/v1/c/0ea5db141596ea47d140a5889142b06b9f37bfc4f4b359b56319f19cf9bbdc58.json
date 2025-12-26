@@ -1,0 +1,36 @@
+{
+  "deps": [
+    "include:[os.h]"
+  ],
+  "file": "../trap.c",
+  "hash": "0ea5db141596ea47d140a5889142b06b9f37bfc4f4b359b56319f19cf9bbdc58",
+  "lang": "C",
+  "symbols": [
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "trap_init"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "external_interrupt_handler"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "trap_handler"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "trap_test"
+    }
+  ],
+  "timestamp": "2025-12-24T07:13:58.438146",
+  "unit": {
+    "module": "11-syscall",
+    "role": "lib"
+  },
+  "version": "pir-analyzer-v1"
+}
