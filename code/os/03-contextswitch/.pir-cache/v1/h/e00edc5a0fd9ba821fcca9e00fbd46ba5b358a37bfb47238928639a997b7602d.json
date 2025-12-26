@@ -1,0 +1,13 @@
+{
+  "deps": [],
+  "file": "../platform.h",
+  "hash": "e00edc5a0fd9ba821fcca9e00fbd46ba5b358a37bfb47238928639a997b7602d",
+  "lang": "H",
+  "symbols": [],
+  "timestamp": "2025-12-26T09:37:19.587190",
+  "unit": {
+    "module": "03-contextswitch",
+    "role": "lib"
+  },
+  "version": "pir-analyzer-v1"
+}

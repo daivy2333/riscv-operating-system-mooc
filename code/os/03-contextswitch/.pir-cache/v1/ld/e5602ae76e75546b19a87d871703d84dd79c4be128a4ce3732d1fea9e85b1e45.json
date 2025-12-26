@@ -1,0 +1,84 @@
+{
+  "deps": [],
+  "file": "../os.ld",
+  "hash": "e5602ae76e75546b19a87d871703d84dd79c4be128a4ce3732d1fea9e85b1e45",
+  "lang": "LD",
+  "symbols": [
+    {
+      "attrs": {},
+      "kind": "ld_entry",
+      "name": "_start"
+    },
+    {
+      "attrs": {},
+      "kind": "ld_symbol",
+      "name": "symbol"
+    },
+    {
+      "attrs": {},
+      "kind": "ld_symbol",
+      "name": "_text_start"
+    },
+    {
+      "attrs": {},
+      "kind": "ld_symbol",
+      "name": "_text_end"
+    },
+    {
+      "attrs": {},
+      "kind": "ld_symbol",
+      "name": "_rodata_start"
+    },
+    {
+      "attrs": {},
+      "kind": "ld_symbol",
+      "name": "_rodata_end"
+    },
+    {
+      "attrs": {},
+      "kind": "ld_symbol",
+      "name": "_data_start"
+    },
+    {
+      "attrs": {},
+      "kind": "ld_symbol",
+      "name": "_data_end"
+    },
+    {
+      "attrs": {},
+      "kind": "ld_symbol",
+      "name": "_bss_start"
+    },
+    {
+      "attrs": {},
+      "kind": "ld_symbol",
+      "name": "_bss_end"
+    },
+    {
+      "attrs": {},
+      "kind": "ld_symbol",
+      "name": "_memory_start"
+    },
+    {
+      "attrs": {},
+      "kind": "ld_symbol",
+      "name": "_memory_end"
+    },
+    {
+      "attrs": {},
+      "kind": "ld_symbol",
+      "name": "_heap_start"
+    },
+    {
+      "attrs": {},
+      "kind": "ld_symbol",
+      "name": "_heap_size"
+    }
+  ],
+  "timestamp": "2025-12-26T09:37:19.589039",
+  "unit": {
+    "module": "03-contextswitch",
+    "role": "lib"
+  },
+  "version": "pir-analyzer-v1"
+}

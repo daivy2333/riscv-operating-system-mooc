@@ -1,6 +1,6 @@
-#define LOAD		lw
-#define STORE		sw
-#define SIZE_REG	4
+#define LOAD		ld
+#define STORE		sd
+#define SIZE_REG	8
 
 # Save all General-Purpose(GP) registers to context.
 # struct context *base = &ctx_task;
@@ -99,6 +99,12 @@
 .balign 4
 switch_to:
 	csrrw	t6, mscratch, t6	# swap t6 and mscratch
+
+	# Debug: print switch_to information
+	mv	a1, t6
+	csrr	t2, mscratch
+	call debug_switch_to
+
 	beqz	t6, 1f			# Note: the first time switch_to() is
 	                                # called, mscratch is initialized as zero
 					# (in sched_init()), which makes t6 zero,
@@ -119,7 +125,14 @@ switch_to:
 	# Restore all GP registers
 	# Use t6 to point to the context of the new task
 	mv	t6, a0
+
+	# Debug: print before restore
+	call debug_switch_to
+
 	reg_restore t6
+
+	# Debug: print after restore
+	call debug_switch_to
 
 	# Do actual context switching.
 	ret

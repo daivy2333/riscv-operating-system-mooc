@@ -1,0 +1,41 @@
+{
+  "deps": [
+    "include:[os.h]"
+  ],
+  "file": "../sched.c",
+  "hash": "e5028c44d0d9614c24b68754ffec185d5cdea830fbece2b5a587c5afbd06538c",
+  "lang": "C",
+  "symbols": [
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "w_mscratch"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "sched_init"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "schedule"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "task_delay"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "user_task0"
+    }
+  ],
+  "timestamp": "2025-12-26T09:37:19.585342",
+  "unit": {
+    "module": "03-contextswitch",
+    "role": "lib"
+  },
+  "version": "pir-analyzer-v1"
+}

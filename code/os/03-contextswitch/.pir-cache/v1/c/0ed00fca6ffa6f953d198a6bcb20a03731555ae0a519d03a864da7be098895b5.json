@@ -1,0 +1,31 @@
+{
+  "deps": [
+    "include:[os.h]"
+  ],
+  "file": "../uart.c",
+  "hash": "0ed00fca6ffa6f953d198a6bcb20a03731555ae0a519d03a864da7be098895b5",
+  "lang": "C",
+  "symbols": [
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "uart_init"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "uart_putc"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "uart_puts"
+    }
+  ],
+  "timestamp": "2025-12-26T09:37:19.589357",
+  "unit": {
+    "module": "03-contextswitch",
+    "role": "lib"
+  },
+  "version": "pir-analyzer-v1"
+}

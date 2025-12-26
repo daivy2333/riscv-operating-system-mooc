@@ -1,0 +1,21 @@
+{
+  "deps": [
+    "include:[os.h]"
+  ],
+  "file": "../kernel.c",
+  "hash": "773e5db4866ef4b250ce586556a59bee6a519fb4154e57263d6fc180afe04503",
+  "lang": "C",
+  "symbols": [
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "start_kernel"
+    }
+  ],
+  "timestamp": "2025-12-26T09:37:19.591046",
+  "unit": {
+    "module": "03-contextswitch",
+    "role": "lib"
+  },
+  "version": "pir-analyzer-v1"
+}

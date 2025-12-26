@@ -1,0 +1,18 @@
+{
+  "deps": [
+    "include:[types.h]",
+    "include:[platform.h]",
+    "include:[stddef.h]",
+    "include:[stdarg.h]"
+  ],
+  "file": "../os.h",
+  "hash": "d1655bfc9eed479ca27178d17a223d487a3ee0eb2f8546971a0977bf9451f637",
+  "lang": "H",
+  "symbols": [],
+  "timestamp": "2025-12-26T09:37:19.588120",
+  "unit": {
+    "module": "03-contextswitch",
+    "role": "lib"
+  },
+  "version": "pir-analyzer-v1"
+}

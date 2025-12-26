@@ -1,0 +1,21 @@
+{
+  "deps": [
+    "call:[f]"
+  ],
+  "file": "../entry.S",
+  "hash": "6c50f7b3438ac9c5bb2f21feae8abc49adfdbc9d72f876ac09fb278390edb90a",
+  "lang": "S",
+  "symbols": [
+    {
+      "attrs": {},
+      "kind": "label",
+      "name": "switch_to"
+    }
+  ],
+  "timestamp": "2025-12-26T09:37:19.587917",
+  "unit": {
+    "module": "03-contextswitch",
+    "role": "lib"
+  },
+  "version": "pir-analyzer-v1"
+}

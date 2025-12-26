@@ -1,0 +1,56 @@
+{
+  "deps": [
+    "include:[os.h]"
+  ],
+  "file": "../page.c",
+  "hash": "d8f44563f9addf45eec94dd630705df3f8a2b3d75e28d2ad1eaa6f68d8acf504",
+  "lang": "C",
+  "symbols": [
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "_clear"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "_is_free"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "_set_flag"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "_is_last"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "_align_page"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "page_init"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "page_free"
+    },
+    {
+      "attrs": {},
+      "kind": "func",
+      "name": "page_test"
+    }
+  ],
+  "timestamp": "2025-12-26T09:37:19.586780",
+  "unit": {
+    "module": "03-contextswitch",
+    "role": "lib"
+  },
+  "version": "pir-analyzer-v1"
+}
